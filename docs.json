@@ -1,52 +1,19 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Novacal.io",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
+  "stylesheet": "/custom.css",
+  "styles": {
+    "css": "/custom.css"
+  },
   "navigation": {
     "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
       {
         "tab": "API reference",
         "groups": [
@@ -57,31 +24,34 @@
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Event Types",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/v1/event-types/get",
+              "api-reference/v1/event-types/create",
+              "api-reference/v1/event-types/delete",
+              "api-reference/v1/event-types/update",
+              "api-reference/v1/event-types/find"
+            ]
+          },
+          {
+            "group": "Teams",
+            "pages": [
+              "api-reference/v1/teams/get",
+              "api-reference/v1/teams/create",
+              "api-reference/v1/teams/delete",
+              "api-reference/v1/teams/update",
+              "api-reference/v1/teams/find"
+            ]
+          },
+          {
+            "group": "Users",
+            "pages": [
+              "api-reference/v1/users/me"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -114,9 +84,45 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://linkedin.com/company/novacal-io",
+      "x": "https://x.com/novacalio"
     }
+  },
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "charset": "UTF-8",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Novacal is a powerful meeting scheduling software that helps you manage calendars, book appointments, and integrate with Google Calendar, Outlook, Zoom, and more. Streamline your scheduling workflow today.",
+      "keywords": "meeting scheduling software, calendar management, appointment booking, scheduling app, Novacal, Google Calendar integration, Outlook integration, Zoom integration, meeting scheduler, appointment scheduler, calendar sync",
+      "author": "Novacal",
+      "robots": "index, follow",
+      "googlebot": "index, follow",
+      "language": "en",
+      "copyright": "Copyright 2025 Novacal",
+      "category": "Productivity Software",
+      "distribution": "global",
+      "coverage": "Worldwide",
+      "og:title": "Novacal - Meeting Scheduling Software Documentation",
+      "og:type": "website",
+      "og:url": "https://docs.novacal.io",
+      "og:description": "Complete documentation for Novacal meeting scheduling software. Learn how to manage calendars, integrate with your favorite tools, and optimize your scheduling workflow.",
+      "og:site_name": "Novacal API Documentation",
+      "og:locale": "en_US",
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@novacalio",
+      "twitter:creator": "@scxxssx",
+      "twitter:title": "Novacal - Meeting Scheduling Software Documentation",
+      "twitter:description": "Complete documentation for Novacal meeting scheduling software. Learn how to manage calendars, integrate with your favorite tools, and optimize your scheduling workflow.",
+      "application-name": "Novacal API Documentation",
+      "apple-mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-title": "Novacal API Documentation"
+    }
+  },
+  "styling": {
+    "customCss": ["/custom.css"]
+  },
+  "appearance": {
+    "default": "dark"
   }
 }

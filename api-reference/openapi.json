@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "Events API",
+    "description": "Public API for managing event types",
     "license": {
       "name": "MIT"
     },
@@ -15,34 +15,20 @@
   ],
   "security": [
     {
-      "bearerAuth": []
+      "bearerAuth": [] 
     }
   ],
   "paths": {
-    "/plants": {
+    "/v1/event-types": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
+        "description": "Returns all event types that the user has access to",
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Event types response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -60,31 +46,31 @@
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "Creates a new event type",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Event type to create",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/NewEventType"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "plant response",
+          "201": {
+            "description": "Event type created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -96,14 +82,14 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/v1/event-types/{id}": {
+      "get": {
+        "description": "Returns a single event type by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of plant to delete",
+            "description": "ID of event type",
             "required": true,
             "schema": {
               "type": "integer",
@@ -112,12 +98,397 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "Event type response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event type not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing event type",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of event type to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Event type data to update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEventType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Event type updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event type not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a single event type by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of event type to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event type deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/teams": {
+      "get": {
+        "description": "Returns all teams that the user is a member of",
+        "responses": {
+          "200": {
+            "description": "Teams response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new team",
+        "requestBody": {
+          "description": "Team to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTeam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Team created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/teams/{id}": {
+      "get": {
+        "description": "Returns a single team by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of team",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing team",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of team to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Team data to update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTeam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Team updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a single team by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of team to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/me": {
+      "get": {
+        "description": "Returns information about the currently authenticated user",
+        "responses": {
+          "200": {
+            "description": "User response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
@@ -130,79 +501,330 @@
       }
     }
   },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
   "components": {
     "schemas": {
-      "Plant": {
+      "EventType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the event type",
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "description": "The name of the event type",
+            "type": "string",
+            "maxLength": 55
+          },
+          "slug": {
+            "description": "The URL-friendly identifier",
+            "type": "string",
+            "maxLength": 80
+          },
+          "description": {
+            "description": "Description of the event type",
+            "type": "string",
+            "maxLength": 5000
+          },
+          "type": {
+            "description": "The type of event",
+            "type": "string",
+            "enum": ["one_on_one", "group", "round_robin", "collective"]
+          },
+          "duration": {
+            "description": "Duration in minutes",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1440
+          },
+          "max_group_size": {
+            "description": "Maximum group size (required for group type)",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 10
+          },
+          "hidden_from_profile": {
+            "description": "Whether the event type is hidden from profile",
+            "type": "boolean"
+          },
+          "color": {
+            "description": "Color code in hex format",
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6})$"
+          },
+          "form_fields": {
+            "description": "Array of active form fields for this event type",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormField"
+            }
+          }
+        }
+      },
+      "FormField": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "description": "Unique identifier for the form field",
+            "type": "string"
+          },
+          "label": {
+            "description": "Display label for the form field",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of form field (e.g., text, email, select)",
+            "type": "string"
+          },
+          "placeholder": {
+            "description": "Placeholder text for the form field",
+            "type": "string"
+          },
+          "is_required": {
+            "description": "Whether the form field is required",
+            "type": "boolean"
+          },
+          "options": {
+            "description": "Array of options for select/dropdown fields",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "description": "The response data. Can be an object, array, or null",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EventType"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EventType"
+                }
+              },
+              {
+                "$ref": "#/components/schemas/Team"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              },
+              {
+                "$ref": "#/components/schemas/User"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "NewEventType": {
         "required": [
-          "name"
+          "name",
+          "slug",
+          "type",
+          "duration",
+          "hidden_from_profile",
+          "color"
         ],
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the plant",
-            "type": "string"
+            "description": "The name of the event type",
+            "type": "string",
+            "maxLength": 55
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "slug": {
+            "description": "The URL-friendly identifier (must be unique)",
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "description": {
+            "description": "Description of the event type",
+            "type": "string",
+            "maxLength": 5000
+          },
+          "type": {
+            "description": "The type of event",
+            "type": "string",
+            "enum": ["one_on_one", "group", "round_robin", "collective"]
+          },
+          "duration": {
+            "description": "Duration in minutes",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1440
+          },
+          "max_group_size": {
+            "description": "Maximum group size (required for group type, min: 2, max: 10)",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 10
+          },
+          "hidden_from_profile": {
+            "description": "Whether the event type is hidden from profile",
+            "type": "boolean"
+          },
+          "color": {
+            "description": "Color code in hex format (e.g., #FF5733)",
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6})$"
+          },
+          "team_id": {
+            "description": "Team ID (required for collective type)",
+            "type": "integer"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the team",
+            "type": "integer",
+            "format": "int64"
           },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+          "name": {
+            "description": "The name of the team",
+            "type": "string",
+            "maxLength": 55
+          },
+          "username": {
+            "description": "The unique username for the team",
+            "type": "string",
+            "maxLength": 255
+          },
+          "about": {
+            "description": "Description or about text for the team",
+            "type": "string",
+            "maxLength": 5000
+          },
+          "logo": {
+            "description": "URL to the team's logo image",
+            "type": "string",
+            "nullable": true
           }
-        ]
+        }
       },
-      "Error": {
+      "NewTeam": {
         "required": [
-          "error",
-          "message"
+          "name",
+          "username"
         ],
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "description": "The name of the team",
+            "type": "string",
+            "maxLength": 55
           },
-          "message": {
+          "username": {
+            "description": "The unique username for the team (must be unique across teams and users)",
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9\\-\\_]+$"
+          },
+          "about": {
+            "description": "Description or about text for the team",
+            "type": "string",
+            "maxLength": 5000
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the user",
+            "type": "integer",
+            "format": "int64"
+          },
+          "first_name": {
+            "description": "The user's first name",
             "type": "string"
+          },
+          "last_name": {
+            "description": "The user's last name",
+            "type": "string"
+          },
+          "username": {
+            "description": "The unique username for the user",
+            "type": "string"
+          },
+          "email": {
+            "description": "The user's email address",
+            "type": "string",
+            "format": "email"
+          },
+          "timezone": {
+            "description": "The user's timezone",
+            "type": "string"
+          },
+          "time_format": {
+            "description": "The user's preferred time format",
+            "type": "string"
+          },
+          "start_of_week": {
+            "description": "The day that starts the week",
+            "type": "string"
+          },
+          "avatar": {
+            "description": "URL to the user's avatar image",
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["success", "error"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "object",
+            "required": ["code", "message"],
+            "properties": {
+              "code": {
+                "description": "Error code identifying the type of error",
+                "type": "string",
+                "example": "VALIDATION_ERROR"
+              },
+              "message": {
+                "description": "Human-readable error message",
+                "type": "string",
+                "example": "The given data was invalid."
+              },
+              "details": {
+                "description": "Additional error details, typically validation errors",
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         }
       }

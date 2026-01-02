@@ -1,23 +1,101 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introduction"
+description: "API reference documentation for the Events API"
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Events API provides endpoints for managing event types and events. All endpoints are authenticated using Bearer tokens and follow RESTful conventions.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="OpenAPI Specification"
+  icon="code"
+  href="/api-reference/openapi.json"
 >
-  View the OpenAPI specification file
+  View the complete OpenAPI specification file
+</Card>
+
+## Event Types
+
+Event types define the different kinds of meetings or events that can be scheduled. Each event type has properties such as:
+
+- **Name and slug**: Human-readable name and URL-friendly identifier
+- **Type**: One of `one_on_one`, `group`, `round_robin`, or `collective`
+- **Duration**: Meeting length in minutes (1-1440)
+- **Group size**: Maximum participants for group events (2-10)
+- **Color**: Visual identifier in hex format
+- **Visibility**: Whether shown on public profile
+
+<CardGroup cols={2}>
+  <Card
+    title="Get Event Types"
+    icon="list"
+    href="/api-reference/v1/event-types/get"
+  >
+    List all event types
+  </Card>
+  <Card
+    title="Create Event Type"
+    icon="plus"
+    href="/api-reference/v1/event-types/create"
+  >
+    Create a new event type
+  </Card>
+  <Card
+    title="Get Event Type"
+    icon="search"
+    href="/api-reference/v1/event-types/find"
+  >
+    Retrieve a single event type
+  </Card>
+  <Card
+    title="Update Event Type"
+    icon="edit"
+    href="/api-reference/v1/event-types/update"
+  >
+    Update an existing event type
+  </Card>
+  <Card
+    title="Delete Event Type"
+    icon="trash"
+    href="/api-reference/v1/event-types/delete"
+  >
+    Delete an event type
+  </Card>
+</CardGroup>
+
+## Teams
+
+Teams allow multiple users to collaborate on event types and events. Each team has:
+
+- **Name and username**: Human-readable name and unique identifier
+- **About**: Description of the team
+- **Logo**: Team branding image
+
+<CardGroup cols={2}>
+  <Card title="Get Teams" icon="list" href="/api-reference/v1/teams/get">
+    List all teams
+  </Card>
+  <Card title="Create Team" icon="plus" href="/api-reference/v1/teams/create">
+    Create a new team
+  </Card>
+  <Card title="Get Team" icon="search" href="/api-reference/v1/teams/find">
+    Retrieve a single team
+  </Card>
+  <Card title="Update Team" icon="edit" href="/api-reference/v1/teams/update">
+    Update an existing team
+  </Card>
+  <Card title="Delete Team" icon="trash" href="/api-reference/v1/teams/delete">
+    Delete a team
+  </Card>
+</CardGroup>
+
+## Users
+
+Retrieve information about the currently authenticated user.
+
+<Card title="Get Current User" icon="user" href="/api-reference/v1/users/me">
+  Get authenticated user information
 </Card>
 
 ## Authentication

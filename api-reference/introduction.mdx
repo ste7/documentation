@@ -5,26 +5,13 @@ description: "API reference documentation for the Events API"
 
 ## Welcome
 
-The Events API provides endpoints for managing event types and events. All endpoints are authenticated using Bearer tokens and follow RESTful conventions.
+Welcome to the Novacal API documentation. This REST API allows you to programmatically manage event types, events, teams, and user information. All endpoints require authentication using Bearer tokens and return responses in JSON format.
 
-<Card
-  title="OpenAPI Specification"
-  icon="code"
-  href="/api-reference/openapi.json"
->
-  View the complete OpenAPI specification file
-</Card>
+Use this API to integrate Novacal's scheduling capabilities into your applications, automate event management, and build custom scheduling workflows.
 
 ## Event Types
 
-Event types define the different kinds of meetings or events that can be scheduled. Each event type has properties such as:
-
-- **Name and slug**: Human-readable name and URL-friendly identifier
-- **Type**: One of `one_on_one`, `group`, `round_robin`, or `collective`
-- **Duration**: Meeting length in minutes (1-1440)
-- **Group size**: Maximum participants for group events (2-10)
-- **Color**: Visual identifier in hex format
-- **Visibility**: Whether shown on public profile
+Event types define the different kinds of meetings or events that can be scheduled.
 
 <CardGroup cols={2}>
   <Card
@@ -66,11 +53,7 @@ Event types define the different kinds of meetings or events that can be schedul
 
 ## Teams
 
-Teams allow multiple users to collaborate on event types and events. Each team has:
-
-- **Name and username**: Human-readable name and unique identifier
-- **About**: Description of the team
-- **Logo**: Team branding image
+Teams allow multiple users to collaborate on event types and events.
 
 <CardGroup cols={2}>
   <Card title="Get Teams" icon="list" href="/api-reference/v1/teams/get">
@@ -92,11 +75,40 @@ Teams allow multiple users to collaborate on event types and events. Each team h
 
 ## Users
 
-Retrieve information about the currently authenticated user.
+Retrieve and update information about the currently authenticated user.
 
-<Card title="Get Current User" icon="user" href="/api-reference/v1/users/me">
-  Get authenticated user information
-</Card>
+<CardGroup cols={2}>
+  <Card title="Get Current User" icon="user" href="/api-reference/v1/users/me">
+    Get authenticated user information
+  </Card>
+  <Card
+    title="Update Current User"
+    icon="edit"
+    href="/api-reference/v1/users/update-me"
+  >
+    Update authenticated user information
+  </Card>
+</CardGroup>
+
+## Events
+
+Events represent scheduled meetings or appointments that have been booked.
+
+<CardGroup cols={2}>
+  <Card title="Get Events" icon="list" href="/api-reference/v1/events/get">
+    List all events
+  </Card>
+  <Card title="Get Event" icon="search" href="/api-reference/v1/events/find">
+    Retrieve a single event
+  </Card>
+  <Card
+    title="Delete Event"
+    icon="trash"
+    href="/api-reference/v1/events/delete"
+  >
+    Delete an event
+  </Card>
+</CardGroup>
 
 ## Authentication
 

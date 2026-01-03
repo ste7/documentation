@@ -15,10 +15,10 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "API reference",
+        "tab": "API documentation",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Getting Started",
             "pages": [
               "api-reference/introduction"
             ]
@@ -46,7 +46,16 @@
           {
             "group": "Users",
             "pages": [
-              "api-reference/v1/users/me"
+              "api-reference/v1/users/me",
+              "api-reference/v1/users/update-me"
+            ]
+          },
+          {
+            "group": "Events",
+            "pages": [
+              "api-reference/v1/events/get",
+              "api-reference/v1/events/find",
+              "api-reference/v1/events/delete"
             ]
           }
         ]

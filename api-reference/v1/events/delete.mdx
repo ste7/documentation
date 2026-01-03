@@ -1,19 +1,19 @@
 ---
-title: "Delete Team"
-openapi: "DELETE /v1/teams/{id}"
+title: "Delete Event"
+openapi: "DELETE /v1/events/{id}"
 ---
 
-Delete a team by its ID. You can only delete teams where you are the owner.
+Delete an event by its ID. You can only delete events that belong to you or are accessible through your team memberships.
 
 <Warning>
-  This action is permanent and cannot be undone. Deleting a team may affect all
-  team members, event types, and scheduled events associated with the team.
+  This action is permanent and cannot be undone. Deleting an event will remove
+  it from all calendars and notifications.
 </Warning>
 
 ## Path Parameters
 
 <ParamField path="id" type="integer" required>
-  The unique identifier of the team to delete.
+  The unique identifier of the event to delete.
 </ParamField>
 
 ## Response
@@ -46,19 +46,7 @@ Delete a team by its ID. You can only delete teams where you are the owner.
   "success": false,
   "error": {
     "code": "NOT_FOUND",
-    "message": "Team not found."
-  }
-}
-```
-</ResponseExample>
-
-<ResponseExample>
-```json Error (403 Forbidden)
-{
-  "success": false,
-  "error": {
-    "code": "ACCESS_DENIED",
-    "message": "You are not authorized to delete this team."
+    "message": "Event not found."
   }
 }
 ```

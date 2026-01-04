@@ -1,69 +1,79 @@
 ---
-title: "Introduction"
-description: "Test test3"
+title: "Welcome to Novacal API"
+description: "Complete API documentation for Novacal meeting scheduling software"
 ---
 
-## Setting up
+## Welcome
 
-Get your documentation site up and running in minutes.
+Welcome to the Novacal API documentation. Novacal is a powerful meeting scheduling software that helps you manage calendars, book appointments, and integrate with Google Calendar, Outlook, Zoom, and more.
 
-<Card title="Start here" icon="rocket" href="/quickstart" horizontal>
-  Follow our three step quickstart guide.
+Our REST API allows you to programmatically manage event types, events, teams, and user information to build custom scheduling workflows and integrate Novacal into your applications.
+
+<Card
+  title="Get Started"
+  icon="rocket"
+  href="/api-reference/introduction"
+  horizontal
+>
+  Start exploring the API endpoints and learn how to authenticate and make your
+  first request.
 </Card>
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
+## Quick Links
 
 <Columns cols={2}>
-  <Card title="Edit locally" icon="pen-to-square" href="/development">
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card title="Customize your site" icon="palette" href="/essentials/settings">
-    Customize the design and colors of your site to match your brand.
-  </Card>
-  <Card title="Set up navigation" icon="map" href="/essentials/navigation">
-    Organize your docs to help users find what they need and succeed with your
-    product.
-  </Card>
   <Card
-    title="API documentation"
+    title="API Reference"
     icon="terminal"
     href="/api-reference/introduction"
   >
-    Auto-generate API documentation from OpenAPI specifications.
+    Complete API reference with all available endpoints and request/response
+    examples.
   </Card>
-</Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card title="Write with MDX" icon="pen-fancy" href="/essentials/markdown">
-    Use MDX to style your docs pages.
-  </Card>
-  <Card title="Code samples" icon="code" href="/essentials/code">
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card title="Images" icon="image" href="/essentials/images">
-    Display images and other media.
+  <Card title="Quickstart Guide" icon="book" href="/quickstart">
+    Get up and running quickly with step-by-step instructions.
   </Card>
   <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
+    title="Event Types"
+    icon="calendar"
+    href="/api-reference/v1/event-types/get"
   >
-    Write once and reuse across your docs.
+    Manage different types of meetings and events that can be scheduled.
+  </Card>
+  <Card title="Events" icon="clock" href="/api-reference/v1/events/get">
+    View and manage scheduled meetings and appointments.
   </Card>
 </Columns>
 
-## Need inspiration?
+## Key Features
+
+<Columns cols={2}>
+  <Card title="RESTful API" icon="code">
+    Clean, intuitive REST API following industry best practices.
+  </Card>
+  <Card title="Bearer Token Auth" icon="lock">
+    Secure authentication using Bearer tokens for all API requests.
+  </Card>
+  <Card title="JSON Responses" icon="file-code">
+    All responses returned in JSON format for easy integration.
+  </Card>
+  <Card title="Comprehensive Docs" icon="book-open">
+    Detailed documentation with examples for every endpoint.
+  </Card>
+</Columns>
+
+## Authentication
+
+All API endpoints require authentication using Bearer tokens. Make sure to include your API key in the Authorization header for all requests.
+
+```bash
+Authorization: Bearer YOUR_API_TOKEN
+```
 
 <Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
+  title="View API Reference"
+  icon="arrow-right"
+  href="/api-reference/introduction"
 >
-  Browse our showcase of exceptional documentation sites.
+  Explore all available endpoints and learn how to authenticate
 </Card>

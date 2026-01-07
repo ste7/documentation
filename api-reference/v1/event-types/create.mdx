@@ -53,62 +53,6 @@ Create a new event type. The slug must be unique for the authenticated user.
   Team ID for collective event types. Required when `type` is `collective`.
 </ParamField>
 
-## Example Request
-
-<RequestExample>
-```json
-{
-  "name": "30 Minute Meeting",
-  "slug": "30-minute-meeting",
-  "description": "A quick 30-minute consultation call",
-  "type": "one_on_one",
-  "duration": 30,
-  "hidden_from_profile": false,
-  "color": "#3B82F6"
-}
-```
-</RequestExample>
-
-## Example Response
-
-<ResponseExample>
-```json Success (201 Created)
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "name": "30 Minute Meeting",
-    "slug": "30-minute-meeting",
-    "description": "A quick 30-minute consultation call",
-    "type": "one_on_one",
-    "duration": 30,
-    "hidden_from_profile": false,
-    "color": "#3B82F6",
-    "max_group_size": null,
-    "form_fields": []
-  }
-}
-```
-</ResponseExample>
-
-## Error Response
-
-<ResponseExample>
-```json Error (400 Bad Request)
-{
-  "success": false,
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "The given data was invalid.",
-    "details": {
-      "slug": ["The slug has already been taken."],
-      "color": ["The color format is invalid."]
-    }
-  }
-}
-```
-</ResponseExample>
-
 ## Example: Group Event Type
 
 <RequestExample>

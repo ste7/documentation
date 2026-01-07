@@ -9,25 +9,22 @@ This REST API allows you to programmatically manage and interact with your Novac
 
 Use this API to integrate Novacal's scheduling capabilities into your applications, automate event management, and build custom scheduling workflows.
 
+## Base URL
+
+All requests contain the following base URL:
+
+```
+https://api.novacal.io
+```
+
+## Rate Limits
+
+The default maximum rate limit is 60 requests per minute per API key. After that, you'll hit the rate limit and receive a `429 Too Many Requests` response error code.
+
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-### Getting Your API Key
-
-To generate and manage your API keys, visit the [API Keys settings page](https://app.novacal.io/settings/api-keys) in your Novacal account. You can create new API keys or manage existing ones from this page.
-
-### Using Your API Key
-
-Include your API key in the `Authorization` header of each request using the Bearer token format:
+To authenticate you need to add an Authorization header with the contents of the header being `Bearer YOUR_API_KEY` where `YOUR_API_KEY` is your API Key. You can generate and manage your API keys on the [API Keys settings page](https://app.novacal.io/settings/api-keys).
 
 ```
 Authorization: Bearer YOUR_API_KEY
-```
-
-Example request:
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-     https://api.novacal.io/v1/endpoint
 ```

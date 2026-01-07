@@ -13,51 +13,46 @@
     "css": "/custom.css"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "API documentation",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Event Types",
-            "pages": [
-              "api-reference/v1/event-types/get",
-              "api-reference/v1/event-types/create",
-              "api-reference/v1/event-types/delete",
-              "api-reference/v1/event-types/update",
-              "api-reference/v1/event-types/find"
-            ]
-          },
-          {
-            "group": "Teams",
-            "pages": [
-              "api-reference/v1/teams/get",
-              "api-reference/v1/teams/create",
-              "api-reference/v1/teams/delete",
-              "api-reference/v1/teams/update",
-              "api-reference/v1/teams/find"
-            ]
-          },
-          {
-            "group": "Users",
-            "pages": [
-              "api-reference/v1/users/me",
-              "api-reference/v1/users/update-me"
-            ]
-          },
-          {
-            "group": "Events",
-            "pages": [
-              "api-reference/v1/events/get",
-              "api-reference/v1/events/find",
-              "api-reference/v1/events/delete"
-            ]
-          }
+        "group": "API Reference",
+        "pages": [
+          "api-reference/introduction"
+        ]
+      },
+      {
+        "group": "Event Types",
+        "pages": [
+          "api-reference/v1/event-types/get",
+          "api-reference/v1/event-types/create",
+          "api-reference/v1/event-types/delete",
+          "api-reference/v1/event-types/update",
+          "api-reference/v1/event-types/find"
+        ]
+      },
+      {
+        "group": "Teams",
+        "pages": [
+          "api-reference/v1/teams/get",
+          "api-reference/v1/teams/create",
+          "api-reference/v1/teams/delete",
+          "api-reference/v1/teams/update",
+          "api-reference/v1/teams/find"
+        ]
+      },
+      {
+        "group": "Users",
+        "pages": [
+          "api-reference/v1/users/me",
+          "api-reference/v1/users/update-me"
+        ]
+      },
+      {
+        "group": "Events",
+        "pages": [
+          "api-reference/v1/events/get",
+          "api-reference/v1/events/find",
+          "api-reference/v1/events/delete"
         ]
       }
     ]

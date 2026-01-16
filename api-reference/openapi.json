@@ -158,7 +158,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/TeamsResponse"
                 }
               }
             }
@@ -184,7 +184,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/TeamResponse"
                 }
               }
             }
@@ -213,7 +213,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/TeamResponse"
                 }
               }
             }
@@ -251,7 +251,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/TeamResponse"
                 }
               }
             }
@@ -331,7 +331,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/EventsResponse"
                 }
               }
             }
@@ -360,7 +360,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/EventResponse"
                 }
               }
             }
@@ -512,12 +512,83 @@
                 }
               },
               {
+                "$ref": "#/components/schemas/Event"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              },
+              {
                 "$ref": "#/components/schemas/User"
               },
               {
                 "type": "null"
               }
             ]
+          }
+        }
+      },
+      "TeamResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Team"
+          }
+        }
+      },
+      "TeamsResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          }
+        }
+      },
+      "EventResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event"
+          }
+        }
+      },
+      "EventsResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
           }
         }
       },
@@ -600,13 +671,44 @@
           },
           "about": {
             "description": "Description or about text for the team",
-            "type": "string",
+            "type": ["string", "null"],
             "maxLength": 5000
           },
           "logo": {
             "description": "URL to the team's logo image",
+            "type": ["string", "null"]
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the event",
+            "type": "integer",
+            "format": "int64"
+          },
+          "start": {
+            "description": "The start date and time of the event",
             "type": "string",
-            "nullable": true
+            "format": "date-time"
+          },
+          "end": {
+            "description": "The end date and time of the event",
+            "type": "string",
+            "format": "date-time"
+          },
+          "location": {
+            "description": "The location of the event",
+            "type": ["string", "null"]
+          },
+          "status": {
+            "description": "The status of the event",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the event",
+            "type": ["string", "null"]
           }
         }
       },

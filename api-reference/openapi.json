@@ -288,7 +288,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/UserResponse"
                 }
               }
             }
@@ -314,7 +314,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/UserResponse"
                 }
               }
             }
@@ -592,6 +592,20 @@
           }
         }
       },
+      "UserResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
       "NewEventType": {
         "required": [
           "name",
@@ -768,16 +782,17 @@
           },
           "time_format": {
             "description": "The user's preferred time format",
-            "type": "string"
+            "type": "integer",
+            "enum": [12, 24]
           },
           "start_of_week": {
-            "description": "The day that starts the week",
-            "type": "string"
+            "description": "The day that starts the week (0 for Sunday, 1 for Monday)",
+            "type": "integer",
+            "enum": [0, 1]
           },
           "avatar": {
             "description": "URL to the user's avatar image",
-            "type": "string",
-            "nullable": true
+            "type": ["string", "null"]
           }
         }
       },

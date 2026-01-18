@@ -134,9 +134,7 @@
   },
   "scripts": [
     {
-      "src": "https://analytics.ahrefs.com/analytics.js",
-      "async": true,
-      "data-key": "nm8GuGFTT4iOwml7EPYMzQ"
+      "src": "/ahrefs-analytics.js"
     }
   ]
 }

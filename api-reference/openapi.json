@@ -1071,6 +1071,10 @@
             "type": "string",
             "enum": ["personal", "team"]
           },
+          "is_active": {
+            "description": "Whether the event type is switched on. A switched off event type is not bookable and its booking page is not reachable",
+            "type": "boolean"
+          },
           "duration": {
             "description": "Duration in minutes",
             "type": "integer",
@@ -1130,11 +1134,31 @@
             "type": ["string", "null"],
             "enum": ["minutes", "hours", "days", null]
           },
+          "allow_rescheduling": {
+            "description": "Whether attendees may reschedule a confirmed booking",
+            "type": "boolean"
+          },
+          "allow_cancellation": {
+            "description": "Whether attendees may cancel a confirmed booking",
+            "type": "boolean"
+          },
+          "availability_id": {
+            "description": "The availability schedule this event type uses",
+            "type": ["integer", "null"],
+            "format": "int64"
+          },
           "booking_frequency_limits": {
             "description": "Optional booking limits by period",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BookingFrequencyLimit"
+            }
+          },
+          "locations": {
+            "description": "Where the meeting takes place. Video locations whose app is not connected are left out, so every entry is one a booking can actually use. Returns an empty array when no location is set",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventTypeLocation"
             }
           },
           "form_fields": {
@@ -1143,6 +1167,35 @@
             "items": {
               "$ref": "#/components/schemas/FormField"
             }
+          },
+          "created_at": {
+            "description": "When the event type was created",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "When the event type was last updated",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "EventTypeLocation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the location",
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "description": "The kind of location",
+            "type": "string",
+            "enum": ["offline", "custom", "zoom", "google_meet", "teams", "phone"]
+          },
+          "details": {
+            "description": "The address for offline, the phone number for phone, free text for custom. Null for video locations, where the join link is generated when the booking is made",
+            "type": ["string", "null"]
           }
         }
       },

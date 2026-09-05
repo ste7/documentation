@@ -1,0 +1,62 @@
+---
+title: "Get Slots"
+"og:title": "Get Slots - Novacal API Documentation"
+"twitter:title": "Get Slots - Novacal API Documentation"
+description: "Retrieve bookable time slots for a Novacal event type, with duration, slot interval, buffers and minimum notice already applied."
+openapi: "GET /v1/event-types/{id}/slots"
+---
+
+<RequestExample>
+```bash cURL
+curl --request GET \
+  --url 'https://api.novacal.io/v1/event-types/123/slots?start=2026-05-29&end=2026-05-30&timezone=UTC' \
+  --header 'Authorization: Bearer <token>'
+```
+</RequestExample>
+
+## What this endpoint is for
+
+Use this endpoint to get times a guest can actually book. Every slot returned is
+already valid, so you can render it straight into a booking UI and post it to
+[Create Event](/api-reference/v1/events/create).
+
+## Slots versus availability
+
+[Get Availability](/api-reference/v1/availability/get) returns the raw windows an
+organizer is free. This endpoint takes those windows and applies the event
+type's rules for you:
+
+- The event type `duration`, so each slot is the right length
+- The `time_slot_interval`, which controls how often a slot starts
+- `buffer_time_before_event` and `buffer_time_after_event`
+- `min_scheduling_notice`, so slots too close to now are left out
+- Existing bookings and `booking_frequency_limits`
+
+Use availability when you want to show an organizer's free time. Use slots when
+you want someone to book.
+
+## Response shape
+
+Slots are grouped by local date. A date with no bookable time is omitted, so an
+event type with nothing available returns an empty object.
+
+```json
+{
+  "success": true,
+  "data": {
+    "slots": {
+      "2026-05-29": [
+        { "start": "2026-05-29T09:00:00+00:00", "end": "2026-05-29T09:30:00+00:00" },
+        { "start": "2026-05-29T09:30:00+00:00", "end": "2026-05-29T10:00:00+00:00" }
+      ]
+    }
+  }
+}
+```
+
+Pass `timezone` as an optional IANA timezone, such as `Europe/Belgrade`, to
+receive slots converted to that timezone and grouped by local date. If omitted,
+the response uses `UTC`.
+
+Pass `duration` when the event type offers a choice of meeting lengths, to get
+slots sized for the length the guest picked.

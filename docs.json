@@ -59,7 +59,8 @@
       {
         "group": "Availability",
         "pages": [
-          "api-reference/v1/availability/get"
+          "api-reference/v1/availability/get",
+          "api-reference/v1/slots/get"
         ]
       },
       {

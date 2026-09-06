@@ -439,7 +439,7 @@
       "put": {
         "description": "Updates information about the currently authenticated user",
         "requestBody": {
-          "description": "User data to update",
+          "description": "User fields to update.",
           "content": {
             "application/json": {
               "schema": {
@@ -2654,14 +2654,7 @@
         }
       },
       "UpdateUser": {
-        "required": [
-          "username",
-          "email",
-          "first_name",
-          "timezone",
-          "time_format",
-          "start_of_week"
-        ],
+        "description": "Fields to update. Send only the fields you want to change. Fields you omit keep their current value.",
         "type": "object",
         "properties": {
           "username": {

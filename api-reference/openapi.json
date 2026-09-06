@@ -1103,6 +1103,32 @@
             }
           }
         }
+      },
+      "post": {
+        "description": "Creates an availability schedule. The working days are derived from the weekdays you send hours for. A new schedule is not the default one, unless it is the first schedule on the account.",
+        "requestBody": {
+          "description": "Availability schedule to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAvailability"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Availability created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/v1/availabilities/{id}": {
@@ -2800,6 +2826,51 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Availability"
+            }
+          }
+        }
+      },
+      "NewAvailability": {
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the schedule",
+            "type": "string",
+            "maxLength": 255,
+            "example": "Working hours"
+          },
+          "timezone": {
+            "description": "IANA timezone the hours are expressed in. Defaults to your account timezone.",
+            "type": "string",
+            "example": "Europe/Belgrade"
+          },
+          "hours": {
+            "description": "Open hours per weekday, in the schedule timezone. A weekday you leave out is closed. Defaults to monday to friday, 09:00 to 17:00.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AvailabilityHours"
+              }
+            },
+            "example": {
+              "monday": [
+                {
+                  "start": "09:00",
+                  "end": "17:00"
+                }
+              ],
+              "tuesday": [
+                {
+                  "start": "09:00",
+                  "end": "12:00"
+                },
+                {
+                  "start": "14:00",
+                  "end": "17:00"
+                }
+              ]
             }
           }
         }

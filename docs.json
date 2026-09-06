@@ -67,6 +67,7 @@
         "group": "Availability Schedules",
         "pages": [
           "api-reference/v1/availabilities/get",
+          "api-reference/v1/availabilities/create",
           "api-reference/v1/availabilities/find",
           "api-reference/v1/availabilities/delete"
         ]

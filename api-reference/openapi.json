@@ -1158,6 +1158,43 @@
           }
         }
       },
+      "put": {
+        "description": "Updates an availability schedule. The working days are derived from the weekdays you send hours for.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the availability schedule to update",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Availability fields to update. Partial updates are supported.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAvailability"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Availability updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "description": "Deletes an availability schedule. Event types that use it move to your default schedule. You cannot delete your only schedule.",
         "parameters": [
@@ -2869,6 +2906,41 @@
                 {
                   "start": "14:00",
                   "end": "17:00"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdateAvailability": {
+        "description": "Fields to update. Send only the fields you want to change. Fields you omit keep their current value.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the schedule",
+            "type": "string",
+            "maxLength": 255,
+            "example": "Mornings only"
+          },
+          "timezone": {
+            "description": "IANA timezone the hours are expressed in",
+            "type": "string",
+            "example": "Europe/Belgrade"
+          },
+          "hours": {
+            "description": "Open hours per weekday, in the schedule timezone. This replaces the whole week, so a weekday you leave out becomes closed.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AvailabilityHours"
+              }
+            },
+            "example": {
+              "monday": [
+                {
+                  "start": "09:00",
+                  "end": "12:00"
                 }
               ]
             }

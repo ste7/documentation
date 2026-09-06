@@ -1,0 +1,40 @@
+---
+title: "Update Availability"
+"og:title": "Update Availability - Novacal API Documentation"
+"twitter:title": "Update Availability - Novacal API Documentation"
+description: "Change the name, timezone, or open hours of a Novacal availability schedule."
+openapi: "PUT /v1/availabilities/{id}"
+---
+
+## Partial updates
+
+Send only the fields you change. A field you leave out keeps its value.
+
+```json
+{ "name": "Mornings only" }
+```
+
+## The hours replace the whole week
+
+`hours` is one value, not a list you add to. The week you send becomes the week that is stored, and every weekday you leave out becomes closed.
+
+```json
+{
+  "hours": {
+    "monday": [{ "start": "09:00", "end": "12:00" }]
+  }
+}
+```
+
+That schedule is now open on Monday morning and **closed on every other day**. To keep Tuesday open, send Tuesday as well.
+
+`working_days` follows the days that have hours, so you never send it.
+
+## Two effects to know
+
+- **A new timezone moves the real times.** The hours stay as written, so `09:00` becomes `09:00` in the new timezone. A person in the old timezone sees a different hour.
+- **Booked events do not move.** A schedule only decides which times are free from now on.
+
+## Access
+
+You can only change schedules on your own account. Another account's schedule returns `403 access_denied`.

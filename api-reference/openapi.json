@@ -363,32 +363,6 @@
             }
           }
         }
-      },
-      "post": {
-        "description": "Creates a new team",
-        "requestBody": {
-          "description": "Team to create",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTeam"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Team created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamResponse"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/v1/teams/{id}": {
@@ -2574,31 +2548,6 @@
           "time_format": {
             "type": ["integer", "null"],
             "enum": [12, 24, null]
-          }
-        }
-      },
-      "NewTeam": {
-        "required": [
-          "name",
-          "username"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the team",
-            "type": "string",
-            "maxLength": 55
-          },
-          "username": {
-            "description": "The unique username for the team (must be unique across teams and users)",
-            "type": "string",
-            "maxLength": 255,
-            "pattern": "^[a-zA-Z0-9\\-\\_]+$"
-          },
-          "about": {
-            "description": "Description or about text for the team",
-            "type": "string",
-            "maxLength": 5000
           }
         }
       },

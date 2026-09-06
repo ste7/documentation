@@ -254,7 +254,7 @@
           }
         ],
         "requestBody": {
-          "description": "Booking form field data to update",
+          "description": "Booking form field fields to update.",
           "content": {
             "application/json": {
               "schema": {
@@ -2327,14 +2327,8 @@
         }
       },
       "UpdateBookingFormField": {
+        "description": "Fields to update. Send only the fields you want to change. Fields you omit keep their current value.",
         "type": "object",
-        "required": [
-          "label",
-          "type",
-          "is_required",
-          "is_active",
-          "position"
-        ],
         "properties": {
           "label": {
             "description": "Display label for the form field",

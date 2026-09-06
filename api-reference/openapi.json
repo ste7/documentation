@@ -1854,7 +1854,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["event.created", "event.rescheduled", "event.canceled"]
+              "enum": ["event.created", "event.rescheduled", "event.canceled", "event.started", "event.ended"]
             },
             "example": ["event.created", "event.canceled"]
           },
@@ -1895,7 +1895,7 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "enum": ["event.created", "event.rescheduled", "event.canceled"]
+              "enum": ["event.created", "event.rescheduled", "event.canceled", "event.started", "event.ended"]
             },
             "example": ["event.created", "event.canceled"]
           },
@@ -1920,7 +1920,7 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "enum": ["event.created", "event.rescheduled", "event.canceled"]
+              "enum": ["event.created", "event.rescheduled", "event.canceled", "event.started", "event.ended"]
             },
             "example": ["event.rescheduled"]
           },

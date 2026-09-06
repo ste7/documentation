@@ -13,10 +13,12 @@ Change an existing webhook without re-registering it. Send only the fields you w
 ## What you can change
 
 - `url` — move deliveries to a different endpoint
-- `events` — replace the list of subscribed events
+- `events` — replace the list of subscribed events, chosen from the [available events](/api-reference/v1/webhooks/create#available-events)
 - `is_active` — set to `false` to pause deliveries, and back to `true` to resume
 
 The signing secret does not change when you update a webhook, so your receiving endpoint keeps working.
+
+`events` replaces the whole list rather than adding to it, so include the events you already subscribe to alongside any new ones. A webhook registered before a new event existed keeps its original list until you update it.
 
 ## Pausing instead of deleting
 

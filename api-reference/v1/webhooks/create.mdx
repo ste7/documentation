@@ -17,8 +17,14 @@ Register a URL that Novacal calls whenever something happens to an event you hos
 | `event.created` | A new event is booked |
 | `event.rescheduled` | An existing event moves to a different time |
 | `event.canceled` | An event is canceled |
+| `event.started` | An event reaches its start time |
+| `event.ended` | An event reaches its end time |
 
 Subscribe to one or more events per webhook. You can register several webhooks pointing at different URLs.
+
+<Note>
+`event.started` and `event.ended` are driven by the clock rather than by an action someone takes, so they are checked once a minute. Expect a delivery within a minute of the event's start or end time, not at the exact second. Canceled events never fire either one, and each fires at most once per event.
+</Note>
 
 ## Delivery format
 

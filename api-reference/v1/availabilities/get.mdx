@@ -1,0 +1,33 @@
+---
+title: "Get Availabilities"
+"og:title": "Get Availabilities - Novacal API Documentation"
+"twitter:title": "Get Availabilities - Novacal API Documentation"
+description: "List the availability schedules on your Novacal account, including their name, timezone, working days, and open hours."
+openapi: "GET /v1/availabilities"
+---
+
+## What this endpoint returns
+
+An availability schedule holds the hours you are open for bookings. This endpoint returns every schedule on your account, newest first.
+
+Each event type points to one schedule. The schedule marked `is_default` is the one new event types get.
+
+## Reading the hours
+
+`working_days` lists the weekdays the schedule is open on. `hours` gives the open periods for each of those weekdays, in the timezone of the schedule. A weekday with more than one period has a break between them.
+
+```json
+{
+  "timezone": "Europe/Belgrade",
+  "working_days": ["monday", "tuesday"],
+  "hours": {
+    "monday": [{ "start": "09:00", "end": "17:00" }],
+    "tuesday": [
+      { "start": "09:00", "end": "12:00" },
+      { "start": "14:00", "end": "17:00" }
+    ]
+  }
+}
+```
+
+These are the rules, not the free times. To see when a person can actually book, which also counts existing events, use [Get Availability](/api-reference/v1/availability/get).

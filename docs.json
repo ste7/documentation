@@ -64,6 +64,14 @@
         ]
       },
       {
+        "group": "Availability Schedules",
+        "pages": [
+          "api-reference/v1/availabilities/get",
+          "api-reference/v1/availabilities/find",
+          "api-reference/v1/availabilities/delete"
+        ]
+      },
+      {
         "group": "Events",
         "pages": [
           "api-reference/v1/events/get",

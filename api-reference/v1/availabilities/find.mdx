@@ -1,0 +1,15 @@
+---
+title: "Get Availability Schedule"
+"og:title": "Get Availability Schedule - Novacal API Documentation"
+"twitter:title": "Get Availability Schedule - Novacal API Documentation"
+description: "Retrieve one Novacal availability schedule by ID, with its timezone, working days, and open hours."
+openapi: "GET /v1/availabilities/{id}"
+---
+
+## What this endpoint returns
+
+One availability schedule, with the same fields as the [list endpoint](/api-reference/v1/availabilities/get).
+
+## Access
+
+You can only read schedules on your own account. Another account's schedule returns `403 access_denied`. An unknown ID returns `404 resource_not_found`.

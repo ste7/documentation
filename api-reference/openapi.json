@@ -865,7 +865,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AvailabilityResponse"
+                  "$ref": "#/components/schemas/EventTypeAvailabilityResponse"
                 }
               }
             }
@@ -1084,6 +1084,70 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/v1/availabilities": {
+      "get": {
+        "description": "Returns the availability schedules of the authenticated user.",
+        "responses": {
+          "200": {
+            "description": "Availabilities response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilitiesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/availabilities/{id}": {
+      "get": {
+        "description": "Returns a single availability schedule by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the availability schedule",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Availability response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an availability schedule. Event types that use it move to your default schedule. You cannot delete your only schedule.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the availability schedule to delete",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Availability deleted successfully (no content)"
           }
         }
       }
@@ -1610,49 +1674,6 @@
           }
         }
       },
-      "AvailabilityResponse": {
-        "type": "object",
-        "required": ["success", "data"],
-        "properties": {
-          "success": {
-            "description": "Indicates whether the request was successful",
-            "type": "boolean",
-            "example": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/AvailabilityPayload"
-          }
-        }
-      },
-      "AvailabilityPayload": {
-        "type": "object",
-        "properties": {
-          "availability": {
-            "description": "Availability ranges grouped by date in the response timezone",
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/AvailabilityRange"
-              }
-            },
-            "example": {
-              "2026-03-23": [
-                {
-                  "start": "2026-03-23T09:00:00+00:00",
-                  "end": "2026-03-23T17:00:00+00:00"
-                }
-              ],
-              "2026-03-24": [
-                {
-                  "start": "2026-03-24T10:00:00+00:00",
-                  "end": "2026-03-24T15:00:00+00:00"
-                }
-              ]
-            }
-          }
-        }
-      },
       "AvailabilityRange": {
         "type": "object",
         "properties": {
@@ -2137,6 +2158,11 @@
             "type": "string",
             "maxLength": 5000
           },
+          "availability_id": {
+            "description": "ID of the availability schedule this event type follows. Must be a schedule on your own account.",
+            "type": "integer",
+            "example": 7
+          },
           "type": {
             "description": "The type of event",
             "type": "string",
@@ -2614,6 +2640,167 @@
             "description": "The day that starts the week (0 for Sunday, 1 for Monday)",
             "type": "integer",
             "enum": [0, 1]
+          }
+        }
+      },
+      "EventTypeAvailabilityPayload": {
+        "type": "object",
+        "properties": {
+          "availability": {
+            "description": "Availability ranges grouped by date in the response timezone",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AvailabilityRange"
+              }
+            },
+            "example": {
+              "2026-03-23": [
+                {
+                  "start": "2026-03-23T09:00:00+00:00",
+                  "end": "2026-03-23T17:00:00+00:00"
+                }
+              ],
+              "2026-03-24": [
+                {
+                  "start": "2026-03-24T10:00:00+00:00",
+                  "end": "2026-03-24T15:00:00+00:00"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "EventTypeAvailabilityResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EventTypeAvailabilityPayload"
+          }
+        }
+      },
+      "AvailabilityHours": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "description": "Opening time in HH:MM, in the schedule timezone",
+            "type": "string",
+            "example": "09:00"
+          },
+          "end": {
+            "description": "Closing time in HH:MM, in the schedule timezone",
+            "type": "string",
+            "example": "17:00"
+          }
+        }
+      },
+      "Availability": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the availability schedule",
+            "type": "integer",
+            "example": 7
+          },
+          "name": {
+            "description": "The name of the schedule",
+            "type": "string",
+            "example": "Working hours"
+          },
+          "timezone": {
+            "description": "IANA timezone the hours are expressed in",
+            "type": "string",
+            "example": "Europe/Belgrade"
+          },
+          "is_default": {
+            "description": "Whether new event types get this schedule",
+            "type": "boolean",
+            "example": true
+          },
+          "working_days": {
+            "description": "The weekdays the schedule is open on",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+            },
+            "example": ["monday", "tuesday"]
+          },
+          "hours": {
+            "description": "Open hours per weekday, in the schedule timezone. A weekday that is absent is closed.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AvailabilityHours"
+              }
+            },
+            "example": {
+              "monday": [
+                {
+                  "start": "09:00",
+                  "end": "17:00"
+                }
+              ],
+              "tuesday": [
+                {
+                  "start": "09:00",
+                  "end": "12:00"
+                },
+                {
+                  "start": "14:00",
+                  "end": "17:00"
+                }
+              ]
+            }
+          },
+          "created_at": {
+            "description": "The date and time the schedule was created",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "The date and time the schedule was last changed",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AvailabilityResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Availability"
+          }
+        }
+      },
+      "AvailabilitiesResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": {
+            "description": "Indicates whether the request was successful",
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Availability"
+            }
           }
         }
       }

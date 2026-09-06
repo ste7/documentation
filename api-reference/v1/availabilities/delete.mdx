@@ -1,0 +1,20 @@
+---
+title: "Delete Availability"
+"og:title": "Delete Availability - Novacal API Documentation"
+"twitter:title": "Delete Availability - Novacal API Documentation"
+description: "Delete a Novacal availability schedule and learn what happens to the event types that use it."
+openapi: "DELETE /v1/availabilities/{id}"
+---
+
+## What happens to your event types
+
+Event types that use the deleted schedule move to your default schedule. They keep working, but they follow the hours of that default schedule from then on.
+
+If you delete the default schedule itself, another one of your schedules becomes the default.
+
+## Limits
+
+- You cannot delete your only schedule. The request returns `400`.
+- You can only delete schedules on your own account. Another account's schedule returns `403 access_denied`.
+
+A successful delete returns `204` with no content.

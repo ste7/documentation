@@ -15,3 +15,8 @@ Use this endpoint to update an existing event type without recreating it from sc
 - Adjust duration, buffers, and scheduling limits
 - Update colors, visibility, or redirect behavior
 - Change configuration tied to the booking experience
+- Point the event type at a different availability schedule
+
+## Changing the schedule
+
+Send `availability_id` to move the event type onto another schedule. Use [Get Availabilities](/api-reference/v1/availabilities/get) to find the ID. The schedule must belong to your own account, otherwise the request returns `422`.

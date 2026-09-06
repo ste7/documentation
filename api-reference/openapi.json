@@ -15,7 +15,7 @@
   ],
   "security": [
     {
-      "bearerAuth": [] 
+      "bearerAuth": []
     }
   ],
   "paths": {
@@ -808,10 +808,20 @@
         }
       }
     },
-    "/v1/availability": {
+    "/v1/event-types/{id}/availability": {
       "get": {
         "description": "Returns availability ranges for one of the authenticated user's event types.",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of event type",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
           {
             "name": "start",
             "in": "query",
@@ -834,17 +844,6 @@
               "type": "string",
               "format": "date",
               "example": "2026-05-30"
-            }
-          },
-          {
-            "name": "event_type_id",
-            "in": "query",
-            "description": "Event type ID used to calculate availability",
-            "required": true,
-            "example": 123,
-            "schema": {
-              "type": "integer",
-              "example": 123
             }
           },
           {
@@ -1671,13 +1670,7 @@
       },
       "NewPublicEventBooking": {
         "type": "object",
-        "required": [
-          "event_type_id",
-          "start",
-          "end",
-          "timezone",
-          "time_format"
-        ],
+        "required": ["event_type_id", "start", "end", "timezone", "time_format"],
         "properties": {
           "event_type_id": {
             "description": "The ID of the event type being booked",
@@ -1721,12 +1714,7 @@
       },
       "UpdatePublicEvent": {
         "type": "object",
-        "required": [
-          "start",
-          "end",
-          "timezone",
-          "time_format"
-        ],
+        "required": ["start", "end", "timezone", "time_format"],
         "properties": {
           "start": {
             "description": "The new event start date and time",
@@ -2032,14 +2020,7 @@
         }
       },
       "NewEventType": {
-        "required": [
-          "name",
-          "slug",
-          "type",
-          "duration",
-          "hidden_from_profile",
-          "color"
-        ],
+        "required": ["name", "slug", "type", "duration", "hidden_from_profile", "color"],
         "type": "object",
         "properties": {
           "name": {
@@ -2249,14 +2230,7 @@
       },
       "NewBookingFormField": {
         "type": "object",
-        "required": [
-          "identifier",
-          "label",
-          "type",
-          "is_required",
-          "is_active",
-          "position"
-        ],
+        "required": ["identifier", "label", "type", "is_required", "is_active", "position"],
         "properties": {
           "identifier": {
             "description": "Unique identifier for the form field within the event type",
